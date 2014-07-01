@@ -337,7 +337,8 @@ class Article < Content
     if not self.id or not other_article.id
       return false
     end
-    self.comments << other_article.comments
+
+    other_article.comments.each { |c| self.comments << c }
     self.body = self.body + " " + other_article.body
     self.save!
     other_article.destroy
