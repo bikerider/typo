@@ -340,7 +340,7 @@ class Article < Content
     self.comments << other_article.comments
     self.body = self.body + " " + other_article.body
     self.save!
-    #other_article.destroy
+    other_article.destroy
     return true
   end
 
