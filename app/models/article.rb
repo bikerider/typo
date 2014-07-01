@@ -329,6 +329,21 @@ class Article < Content
     end
   end
 
+  def merge_with(other_article_id)
+    other_article = Article.find_by_id(other_article_id)
+    if not other_article
+      return false
+    end
+    if not self.id or not other_article.id
+      return false
+    end
+    self.comments << other_article.comments
+    self.body = self.body + " " + other_article.body
+    self.save!
+    #other_article.destroy
+    return true
+  end
+
   def keywords_to_tags
     Article.transaction do
       tags.clear
